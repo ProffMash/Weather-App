@@ -1,7 +1,6 @@
 import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from 'react';
-import { fetchWeather } from '../utils/fetchWeather';
 import { MoonLoader } from 'react-spinners';
-import toast, { Toaster } from 'react-hot-toast';
+import { fetchWeather } from '../utils/fetchWeather';
 
 interface WeatherData {
   location: {
@@ -19,7 +18,7 @@ interface WeatherData {
   };
   forecast: {
     forecastday: Array<{
-      hour: any;
+      [x: string]: any;
       date: string;
       day: {
         maxtemp_c: number;
@@ -58,10 +57,8 @@ const WeatherCard = () => {
       try {
         const data = await fetchWeather(location);
         setWeatherData(data);
-        toast.success(`Weather data for ${location} loaded successfully.`);
       } catch (err) {
         setError('Failed to load weather data');
-        toast.error('Failed to load weather data.');
       } finally {
         setLoading(false);
       }
@@ -90,7 +87,6 @@ const WeatherCard = () => {
 
   return (
     <div className="max-w-md mx-auto bg-gradient-to-b from-blue-100 to-white p-4 rounded-2xl shadow-lg lg:max-w-lg">
-      <Toaster position="top-right" />
       <div className="flex flex-col mb-4">
         <input
           type="text"
