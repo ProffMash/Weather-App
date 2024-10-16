@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from 'react';
+import { MoonLoader } from 'react-spinners';
 import { fetchWeather } from '../utils/fetchWeather';
 
 interface WeatherData {
@@ -17,7 +18,7 @@ interface WeatherData {
   };
   forecast: {
     forecastday: Array<{
-      [x: string]: any;
+      hour: any;
       date: string;
       day: {
         maxtemp_c: number;
@@ -31,7 +32,7 @@ interface WeatherData {
   };
 }
 
-const WeatherCard: React.FC = () => {
+const WeatherCard = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -67,7 +68,11 @@ const WeatherCard: React.FC = () => {
   }, [location]);
 
   if (loading) {
-    return <div className="text-center">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <MoonLoader size={50} color="#3498db" />
+      </div>
+    );
   }
 
   if (error || !weatherData) {
@@ -109,7 +114,7 @@ const WeatherCard: React.FC = () => {
       </div>
 
       <div className="flex mt-6 space-x-2 overflow-x-auto">
-        {forecastday[0].hour.slice(19, 24).map((hour: { time: string; condition: { icon: string | undefined; text: string | undefined; }; temp_c: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
+        {forecastday[0].hour.slice(19, 24).map((hour: { time: string; condition: { icon: string | undefined; text: string | undefined; }; temp_c: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }, index: Key | null | undefined) => (
           <div key={index} className="flex flex-col items-center">
             <div className="text-sm text-gray-600">{hour.time.split(' ')[1]}</div>
             <div className="text-2xl mt-2">
