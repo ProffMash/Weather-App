@@ -24,3 +24,20 @@ A responsive weather application built using React, TypeScript, and Tailwind CSS
    ```bash
    git clone https://github.com/your-username/weather-app.git
    cd weather-app
+
+
+## Project Structure
+├── public
+├── src
+│   ├── components
+│   │   └── WeatherCard.tsx  # Main component for displaying weather data
+│   ├── utils
+│   │   └── fetchWeather.ts  # Utility function to fetch weather data from API
+│   ├── App.tsx
+│   ├── index.tsx
+│   ├── styles
+│   │   └── index.css        # Tailwind CSS imports
+├── .env                     
+├── package.json
+├── README.md
+
