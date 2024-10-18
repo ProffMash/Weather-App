@@ -9,4 +9,4 @@ export const fetchWeather = async (location: string) => {
     }
     return response.json();
   };
-  
+  //fetching weather data from the API
